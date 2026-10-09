@@ -1,35 +1,33 @@
-# API CRUD para controle de tarefas
+# API de tarefas
 
-Atividade guiada com Spring Boot 4.1.1, Java 21, Maven e Spring Web.
-As tarefas são armazenadas em uma lista em memória.
+Projeto da atividade guiada, feito com Spring Boot 4.1.1, Java 21 e Maven. A API permite criar, consultar, atualizar e excluir tarefas, que ficam salvas em memória.
 
-## Executar
+## Como iniciar
 
-No Windows, dentro da pasta do projeto:
+Com o Java 21 instalado, abra o PowerShell na pasta do projeto e execute:
 
 ```powershell
+cd "atividade-guiada-aula-01-frameworks-2"
 .\mvnw.cmd spring-boot:run
 ```
 
-No Linux ou macOS:
+Se o projeto estiver em outro lugar, ajuste o caminho. Aguarde aparecer `Started TaskApiApplication` e mantenha o terminal aberto. Para encerrar, use `Ctrl+C`.
 
-```sh
-./mvnw spring-boot:run
-```
+## Como testar
 
-A API estará disponível em `http://localhost:8080/tasks`.
+Acesse <http://localhost:8080/tasks>. Se aparecer `[]`, a API está funcionando e ainda não há tarefas cadastradas.
 
-## Operações
+No Postman, use estas rotas:
 
-| Método | Caminho | Operação |
+| Método | Rota | O que faz |
 | --- | --- | --- |
-| GET | /tasks | Listar todas as tarefas |
-| GET | /tasks/{id} | Buscar uma tarefa pelo ID |
-| POST | /tasks | Criar uma tarefa |
-| PUT | /tasks/{id} | Atualizar uma tarefa |
-| DELETE | /tasks/{id} | Excluir uma tarefa |
+| GET | /tasks | Lista as tarefas |
+| GET | /tasks/{id} | Busca uma tarefa |
+| POST | /tasks | Cria uma tarefa |
+| PUT | /tasks/{id} | Atualiza uma tarefa |
+| DELETE | /tasks/{id} | Exclui uma tarefa |
 
-Para POST e PUT, use `Content-Type: application/json` e um corpo como:
+Para criar, envie um POST para `http://localhost:8080/tasks`, com **Body → raw → JSON**:
 
 ```json
 {
@@ -40,6 +38,6 @@ Para POST e PUT, use `Content-Type: application/json` e um corpo como:
 }
 ```
 
-Na criação, use ID igual a zero para que ele seja gerado automaticamente. Na atualização,
-o ID usado é o informado no caminho. O campo `dueDate` contém data e horário,
-conforme o tipo `LocalDateTime` do modelo fornecido no trabalho.
+O ID será gerado automaticamente. Use o ID retornado no lugar de `{id}` nas outras rotas. Para atualizar, envie um PUT com os novos dados no mesmo formato.
+
+Ao reiniciar a aplicação, as tarefas são apagadas.
